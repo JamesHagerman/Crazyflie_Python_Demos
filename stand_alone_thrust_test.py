@@ -18,9 +18,6 @@ class Main:
  
     def __init__(self):
 
-        # print "Debug: " + str(self.is_number("f"))
-        # return
-
         self.crazyflie = Crazyflie()
         cflib.crtp.init_drivers()
  
@@ -37,7 +34,7 @@ class Main:
         print "Beginning input loop:"
         while 1:
             try: 
-                command = raw_input("Set thrust (10001-60000) (setting it to 0 will disconnect):")
+                command = raw_input("Set thrust (10001-60000) (0 will turn off the motors, e or q will quit):")
 
                 if (command=="exit") or (command=="e") or (command=="quit") or (command=="q"):
                     # Exit command received
@@ -69,7 +66,6 @@ class Main:
 
                 else: 
                     print "Bad thrust value. Enter a number or e to exit"
-
      
             except:
                 print "Exception thrown! Trying to continue!", sys.exc_info()[0]
@@ -82,12 +78,11 @@ class Main:
             return False
 
     def pulse_command(self):
-
         while 1:
             self.crazyflie.commander.send_setpoint(self.roll, self.pitch, self.yawrate, self.thrust)
             time.sleep(0.1)
      
-            # ..and go again!
+            # Exit if the parent told us to
             if self._stop==1:
                 print "Exiting keep alive thread"
                 return
