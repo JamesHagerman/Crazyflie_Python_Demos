@@ -8,10 +8,10 @@ How To
 ======
 
 There are two ways of running these scripts. Either add the lib directory of the Crazyflie PC Client to your PYTHONPATH environment variable:
+
 export PYTHONPATH="~/cfclient-2013.4.1/lib/":$PYTHONPATH
 
 Or just put the scripts into the lib/ directory itself.
-
 
 The Crazyflie PC Client repo and the python library these scripts depend on can be found here:
 
